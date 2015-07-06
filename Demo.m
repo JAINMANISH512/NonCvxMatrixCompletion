@@ -6,14 +6,20 @@ n1 = 50; n2 = 60; r = 5;
 % Generating matrix
 X = randn(n1,r)*randn(r,n2);
 
+load X.mat
+
 % Vectrozizing the matrix for projection
 x = X(:);
 
 sizeX = size(X);
-save X.mat X;
+
 % Generating random sampling points
 T = randperm(prod(sizeX));
 IDX = T(1:round(0.4*prod(sizeX))); % 40% sampling
+
+
+
+load IDX.dat
 
 % Creating operator for selecting entries at the chosen random locations 
 % Requires Sparco Toolbox 
@@ -22,9 +28,11 @@ M = opRestriction(prod(sizeX), IDX);
 
 % Sampled data
 y = M(x,1);
-save y.mat y;
 
-% For proposed algorithms
+
+% For proposed algorithms on saved input
+
+
 fprintf('\nResults by code provided by authors\n');
 XRec = NonCVX_MC(y,M,sizeX,0.1); % Non Convex Algorithm for p = 0.1
 norm(X-XRec,'fro')/norm(X,'fro') % Normalized Mean Squared Error
@@ -36,9 +44,8 @@ XRec = IST_MC(y,M,sizeX); % Regularized Iterated Soft Thresholding
 norm(X-XRec,'fro')/norm(X,'fro') % Normalized Mean Squared Error
 
 
-%Reproducing code:
-load X.mat
-load y.mat
+%Reproducing code on same input:
+
 fprintf('\nResults by code with the suggested changed to be in accordance to the paper\n');
 XRec = NonCVX_MC_replica_version(y,M,sizeX,0.1); % Non Convex Algorithm for p = 0.1
 norm(X-XRec,'fro')/norm(X,'fro') % Normalized Mean Squared Error
