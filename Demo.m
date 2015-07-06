@@ -1,10 +1,10 @@
 % Demo
 
 % Problem Size: n1, n2 - matrix dimensions, r - rank
-n1 = 50; n2 = 60; r = 5;
+%n1 = 50; n2 = 60; r = 5;
 
 % Generating matrix
-X = randn(n1,r)*randn(r,n2);
+%X = randn(n1,r)*randn(r,n2);
 
 load X.mat
 
@@ -14,8 +14,8 @@ x = X(:);
 sizeX = size(X);
 
 % Generating random sampling points
-T = randperm(prod(sizeX));
-IDX = T(1:round(0.4*prod(sizeX))); % 40% sampling
+%T = randperm(prod(sizeX));
+%IDX = T(1:round(0.4*prod(sizeX))); % 40% sampling
 
 
 
